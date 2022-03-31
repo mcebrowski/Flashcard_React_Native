@@ -1,6 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import DecksList from '../screens/DecksList';
+import DeckDetail from '../screens/DeckDetail';
+import AddDeck from '../screens/AddDeck';
+import AddCard from '../screens/AddCard';
+import StartQuiz from '../screens/Quiz';
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
@@ -8,13 +13,13 @@ const StackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen
         options={{ headerShown: false }}
-        name="DeckList"
-        component={DeckList}
+        name="Decks List"
+        component={DecksList}
       />
-      <Stack.Screen name="DeckDetail" component={DeckDetail} />
+      <Stack.Screen name="Deck Detail" component={DeckDetail} />
       <Stack.Screen name="Add Deck" component={AddDeck} />
-      <Stack.Screen name="AddCard" component={AddCard} />
-      <Stack.Screen name="StartQuiz" component={StartQuiz} />
+      <Stack.Screen name="Add Card" component={AddCard} />
+      <Stack.Screen name="Start Quiz" component={StartQuiz} />
     </Stack.Navigator>
   );
 };

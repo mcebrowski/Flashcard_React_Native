@@ -1,13 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { NavigationContainer } from '@react-navigation/native';
+
+import reducer from './store/reducers/reducers';
 import TabsNavigator from './navigation/TabsNavigator';
 
-const rootReducer = combineReducers({
-  decks: decksReducer,
-});
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default function App() {
   return (
