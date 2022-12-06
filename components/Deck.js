@@ -17,7 +17,10 @@ const Deck = (props) => {
         <Text style={styles.deckText}>{deck.title}</Text>
       </View>
       <View>
-        <Text style={styles.cardText}>{deck.questions.length} Cards</Text>
+        <Text style={styles.cardText}>{deck.questions.length} Fiszek</Text>
+      </View>
+      <View>
+        <Text style={styles.cardText}>Kategoria: {deck.category}</Text>
       </View>
     </View>
   );

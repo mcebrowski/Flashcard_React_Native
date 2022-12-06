@@ -1,41 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { decks } from './_Data';
 
-const DECKS_STORAGE_KEY = 'Flashcards_RN:decks';
-
-export const ANSWER_KEY =
-  new Date().getFullYear().toString() +
-  new Date().getMonth().toString() +
-  new Date().getDate().toString();
-
-export const AnswerQuestion = async ({ deck, question, passed }) => {
-  const key = deck + ' ' + question;
-  return await AsyncStorage.mergeItem(
-    ANSWER_KEY,
-    JSON.stringify({ [key]: passed })
-  );
-};
-
-export const ClearAnswer = async (key) => {
-  const answers = await JSON.parse(await AsyncStorage.getItem(ANSWER_KEY));
-  const seletedAnswers = Object.keys(answers).filter((s) => s.startsWith(key));
-  seletedAnswers.map((s) => {
-    answers[s] = undefined;
-    delete answers[s];
-  });
-  await AsyncStorage.setItem(ANSWER_KEY, JSON.stringify(answers));
-};
+const DECKS_STORAGE_KEY = 'Flashcards_RN:decks_test9';
 
 export function getData() {
   return decks;
-}
-
-function formatDeckResults(results) {
-  return results === null ? decks : JSON.parse(results);
-}
-
-export function getDecksOld() {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(formatDeckResults);
 }
 
 export async function getDecks() {
@@ -52,31 +21,25 @@ export async function getDecks() {
   }
 }
 
-export async function getDeck(title) {
+export async function getDeck(id) {
   try {
     const storeResults = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
 
-    return JSON.parse(storeResults)[title];
+    return JSON.parse(storeResults)[id];
   } catch (error) {
     console.log(error);
   }
 }
 
-export const SubmitDeck = async (entry) => {
-  const result = await AsyncStorage.mergeItem(
-    DECKS_STORAGE_KEY,
-    JSON.stringify(entry)
-  );
-  return result;
-};
-
-export async function saveDeckTitleAS(title) {
+export async function saveDeckTitleAS(id, deck) {
   try {
     await AsyncStorage.mergeItem(
       DECKS_STORAGE_KEY,
       JSON.stringify({
-        [title]: {
-          title,
+        [id]: {
+          id,
+          category: deck.category,
+          title: deck.title,
           questions: [],
         },
       })
@@ -110,3 +73,45 @@ export async function resetDecks() {
     console.log(error);
   }
 }
+
+/* 
+export const ANSWER_KEY =
+  new Date().getFullYear().toString() +
+  new Date().getMonth().toString() +
+  new Date().getDate().toString();
+  
+export const AnswerQuestion = async ({ deck, question, passed }) => {
+  const key = deck + ' ' + question;
+  return await AsyncStorage.mergeItem(
+    ANSWER_KEY,
+    JSON.stringify({ [key]: passed })
+  );
+};
+
+export const ClearAnswer = async (key) => {
+  const answers = await JSON.parse(await AsyncStorage.getItem(ANSWER_KEY));
+  const seletedAnswers = Object.keys(answers).filter((s) => s.startsWith(key));
+  seletedAnswers.map((s) => {
+    answers[s] = undefined;
+    delete answers[s];
+  });
+  await AsyncStorage.setItem(ANSWER_KEY, JSON.stringify(answers));
+}; 
+
+export const SubmitDeck = async (entry) => {
+  const result = await AsyncStorage.mergeItem(
+    DECKS_STORAGE_KEY,
+    JSON.stringify(entry)
+  );
+  return result;
+};
+
+function formatDeckResults(results) {
+  return results === null ? decks : JSON.parse(results);
+}
+
+export function getDecksOld() {
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(formatDeckResults);
+}
+
+*/

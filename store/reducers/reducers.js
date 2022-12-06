@@ -15,19 +15,16 @@ const decks = (state = {}, action) => {
         ...action.decks,
       };
     case ADD_DECK:
-      const { title } = action;
+      const { id, deck } = action;
       return {
         ...state,
-        [title]: {
-          title,
+        [id]: {
+          id,
+          category: deck.category,
+          title: deck.title,
           questions: [],
         },
       };
-    case REMOVE_DECK:
-      const { id } = action;
-      const { [id]: value, ...remainingDecks } = state;
-      console.log(remainingDecks);
-      return remainingDecks;
     case ADD_CARD:
       const { deckId, card } = action;
       return {
@@ -37,9 +34,15 @@ const decks = (state = {}, action) => {
           questions: [...state[deckId].questions].concat(card),
         },
       };
-    case RESET_STORE:
-      return MydecksList;
 
+    /* case REMOVE_DECK:
+      const { delDeckId } = action;
+      const { [delDeckId]: value, ...remainingDecks } = state;
+      console.log(remainingDecks);
+      return remainingDecks;
+
+    case RESET_STORE:
+      return MydecksList; */
     default:
       return state;
   }

@@ -14,7 +14,7 @@ const TabsNavigator = () => {
           let iconName;
           if (route.name === 'Home') {
             iconName = focused ? 'list' : 'list-outline';
-          } else if (route.name === 'Add Deck') {
+          } else if (route.name === 'Dodaj zestaw') {
             iconName = focused ? 'add-circle' : 'add-circle-outline';
           }
 
@@ -27,7 +27,7 @@ const TabsNavigator = () => {
         component={StackNavigator}
         options={{ headerShown: false, headerTitle: '' }}
       />
-      <Tab.Screen name="Add Deck" component={AddDeck} />
+      <Tab.Screen name="Dodaj zestaw" component={AddDeck} />
     </Tab.Navigator>
   );
 };

@@ -12,7 +12,7 @@ import { handleInitialData } from '../store/actions/actions';
 import { blue, orange } from '../utilities/colors';
 import Deck from '../components/Deck';
 
-const DecksList = (props) => {
+const DecksList = ({ navigation }) => {
   const dispatch = useDispatch();
   const decks = useSelector((state) => state);
 
@@ -30,10 +30,10 @@ const DecksList = (props) => {
               <TouchableOpacity
                 key={deck.title}
                 onPress={() =>
-                  props.navigation.navigate('Deck Detail', { deck: deck })
+                  navigation.navigate('Deck Detail', { deck: deck })
                 }
               >
-                <Deck id={deck.title} />
+                <Deck id={deck.id} />
               </TouchableOpacity>
             );
           })}
